@@ -1,12 +1,12 @@
 import {
-  REQUEST_GET_ARTICLES,
-  REQUEST_GET_ARTICLES_FAILURE,
-  REQUEST_GET_ARTICLES_SUCCESS
+  REQUEST_GET_COMMENTS,
+  REQUEST_GET_COMMENTS_FAILURE,
+  REQUEST_GET_COMMENTS_SUCCESS
 } from '../../actionTypes';
 
 
 
-export default function articles(state = {}, action) {
+export default function comments(state = {}, action) {
   return {
     list: list(state.list, action)
   };
@@ -26,21 +26,21 @@ function list(state = DEFAULT_LIST_STATE, action) {
   let nextState = state;
 
   switch (action.type) {
-    case REQUEST_GET_ARTICLES:
+    case REQUEST_GET_COMMENTS:
       nextState = {...nextState, ...{
         status: 'pending',
         message: action.message
       }};
       break;
-    case REQUEST_GET_ARTICLES_FAILURE:
+    case REQUEST_GET_COMMENTS_FAILURE:
       nextState = {...nextState, ...{
         status: 'failure',
         message: action.message
       }};
       break;
-    case REQUEST_GET_ARTICLES_SUCCESS:
-      let data = action.data.map(function (article) {
-        return article.id;
+    case REQUEST_GET_COMMENTS_SUCCESS:
+      let data = action.data.map(function (comment) {
+        return comment.id;
       });
 
       nextState = {...nextState, ...{

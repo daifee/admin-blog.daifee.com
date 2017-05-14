@@ -7,6 +7,8 @@ import ContentContainer from '../../components/ContentContainer';
 import * as actionsArticles from '../../actions/articles';
 import getQueryPagination from '../../utils/getQueryPagination';
 import {Link} from 'react-router-dom';
+import connect from '../../utils/connectPage';
+
 
 const columns = [{
   title: '标题',
@@ -46,17 +48,12 @@ const columns = [{
 }];
 
 
-export default class Articles extends React.Component {
+class Articles extends React.Component {
   unlinstenRouter = null;
 
   render() {
-    let {pages, entities, history} = this.props;
-    let {list} = pages.articles;
+    let {list, history} = this.props;
     let {page, perPage, data, status} = list;
-
-    data = data.map(function (id) {
-      return entities.articles[id];
-    });
 
     // 只显示下一页，没有了就不显示
     let total = page * perPage;
@@ -109,3 +106,17 @@ export default class Articles extends React.Component {
   }
 }
 
+
+
+export default connect(function (state) {
+  let props = {
+    list: state.pages.articles.list
+  };
+  let entities = state.entities;
+
+  props.list.data = props.list.data.map(function (id) {
+    return entities.articles[id];
+  });
+
+  return props;
+}, Articles);

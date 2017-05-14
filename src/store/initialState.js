@@ -5,7 +5,8 @@ const key = 'backend-blog.daifee.com-state';
 
 export function get() {
   let state = localStorage.getItem(key);
-  state = JSON.parse(state) || {};
+  // reducers定义了默认值，但这里要传递undefined
+  state = JSON.parse(state) || undefined;
 
   return state;
 }
@@ -15,10 +16,10 @@ export function set(store) {
     return function (action) {
       next(action);
 
-      let state = store.getState();
-      state = JSON.stringify(state);
+      // let state = store.getState();
+      // state = JSON.stringify(state);
 
-      localStorage.setItem(key, state);
+      // localStorage.setItem(key, state);
     }
   }
 }

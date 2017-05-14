@@ -1,24 +1,25 @@
 import store from '../store';
 import {
-  REQUEST_GET_ARTICLES,
-  REQUEST_GET_ARTICLES_FAILURE,
-  REQUEST_GET_ARTICLES_SUCCESS
+  REQUEST_GET_COMMENTS,
+  REQUEST_GET_COMMENTS_SUCCESS,
+  REQUEST_GET_COMMENTS_FAILURE
 } from '../actionTypes';
-import * as servicesArticle from '../services/article';
+import * as servicesComment from '../services/comment';
 
 
 function request(message = '请求数据...') {
   let action = {
-    type: REQUEST_GET_ARTICLES,
+    type: REQUEST_GET_COMMENTS,
     message
   };
 
   store.dispatch(action);
 }
 
+
 function requestSuccess(data, page, perPage, message = '请求数据成功！') {
   let action = {
-    type: REQUEST_GET_ARTICLES_SUCCESS,
+    type: REQUEST_GET_COMMENTS_SUCCESS,
     data,
     page,
     perPage,
@@ -30,7 +31,7 @@ function requestSuccess(data, page, perPage, message = '请求数据成功！') 
 
 function requestFailure(message = '请求数据失败！') {
   let action = {
-    type: REQUEST_GET_ARTICLES_FAILURE,
+    type: REQUEST_GET_COMMENTS_FAILURE,
     message
   };
 
@@ -41,7 +42,7 @@ function requestFailure(message = '请求数据失败！') {
 export function fetch(page, perPage = 20) {
   request();
 
-  return servicesArticle.getList(page, perPage).then(function (articles) {
+  return servicesComment.getList(page, perPage).then(function (articles) {
     requestSuccess(articles, page, perPage);
     return articles;
   }).catch(function (err) {
@@ -49,3 +50,5 @@ export function fetch(page, perPage = 20) {
     throw err;
   });
 }
+
+

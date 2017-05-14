@@ -17,19 +17,9 @@ import React from 'react'
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
-  withRouter
+  Switch
 } from 'react-router-dom';
-import {connect} from 'react-redux';
 
-
-function connectPage(Page) {
-  return withRouter(connect(mapStateToProps)(Page));
-}
-
-function mapStateToProps(state) {
-  return state;
-}
 
 
 
@@ -38,20 +28,20 @@ export default function () {
     <Router>
       <div id='container'>
         <Switch>
-          <Route exact path='/' component={connectPage(Login)} />
+          <Route exact path='/' component={Login} />
 
-          <Route exact path='/articles' component={connectPage(Articles)} />
-          <Route exact path='/articles/:id/edit' component={connectPage(ArticleEdit)} />
-          <Route exact path='/article/:id' component={connectPage(Article)} />
+          <Route exact path='/articles' component={Articles} />
+          <Route exact path='/articles/:id/edit' component={ArticleEdit} />
+          <Route exact path='/article/:id' component={Article} />
 
-          <Route exact path='/comments' component={connectPage(Comments)} />
-          <Route exact path='/comments/:id' component={connectPage(Comment)} />
+          <Route exact path='/comments' component={Comments} />
+          <Route exact path='/comments/:id' component={Comment} />
 
-          <Route exact path='/users' component={connectPage(Users)} />
-          <Route exact path='/users/:id/edit' component={connectPage(UserEdit)} />
-          <Route exact path='/users/:id' component={connectPage(User)} />
+          <Route exact path='/users' component={Users} />
+          <Route exact path='/users/:id/edit' component={UserEdit} />
+          <Route exact path='/users/:id' component={User} />
 
-          <Route component={connectPage(NotFound)} />
+          <Route component={NotFound} />
         </Switch>
       </div>
     </Router>
