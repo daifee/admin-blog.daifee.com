@@ -1,0 +1,15 @@
+@import '~antd/dist/antd.css';
+
+#root {
+  height: 100%;
+
+  > .ant-layout {
+    height: 100%;
+  }
+
+  .logo {
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+  }
+}
