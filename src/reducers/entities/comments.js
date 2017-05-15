@@ -1,6 +1,7 @@
 import {
   REQUEST_GET_COMMENT_SUCCESS,
-  REQUEST_GET_COMMENTS_SUCCESS
+  REQUEST_GET_COMMENTS_SUCCESS,
+  REQUEST_DELETE_COMMENT_SUCCESS
 } from '../../actionTypes';
 
 
@@ -18,6 +19,10 @@ export default function comments(state = {}, action) {
         let oldComment = nextState[comment.id] || {};
         return nextState[comment.id] = {...oldComment, ...comment};
       });
+      break;
+    case REQUEST_DELETE_COMMENT_SUCCESS:
+      nextState = {...nextState};
+      delete nextState[action.id];
       break;
     default:
       // eslint-disable-line
