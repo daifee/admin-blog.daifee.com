@@ -3,8 +3,12 @@
 #root {
   height: 100%;
 
-  > .ant-layout {
+  #container {
     height: 100%;
+
+    > .ant-layout {
+      min-height: 100%;
+    }
   }
 
   .logo {
