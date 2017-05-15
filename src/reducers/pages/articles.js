@@ -1,7 +1,10 @@
 import {
   REQUEST_GET_ARTICLES,
   REQUEST_GET_ARTICLES_FAILURE,
-  REQUEST_GET_ARTICLES_SUCCESS
+  REQUEST_GET_ARTICLES_SUCCESS,
+  REQUEST_DELETE_ARTICLE,
+  REQUEST_DELETE_ARTICLE_SUCCESS,
+  REQUEST_DELETE_ARTICLE_FAILURE
 } from '../../actionTypes';
 
 
@@ -23,37 +26,63 @@ const DEFAULT_LIST_STATE = {
 
 
 function list(state = DEFAULT_LIST_STATE, action) {
-  let nextState = state;
+  let nextState;
 
   switch (action.type) {
     case REQUEST_GET_ARTICLES:
-      nextState = {...nextState, ...{
+    case REQUEST_DELETE_ARTICLE:
+      nextState = {...state, ...{
         status: 'pending',
         message: action.message
       }};
       break;
     case REQUEST_GET_ARTICLES_FAILURE:
-      nextState = {...nextState, ...{
+    case REQUEST_DELETE_ARTICLE_FAILURE:
+      nextState = {...state, ...{
         status: 'failure',
         message: action.message
       }};
       break;
     case REQUEST_GET_ARTICLES_SUCCESS:
-      let data = action.data.map(function (article) {
-        return article.id;
-      });
-
-      nextState = {...nextState, ...{
-        data: [...data],
-        status: 'success',
-        page: action.page,
-        perPage: action.perPage,
-        message: action.message
-      }};
+      nextState = getArticlesSuccess(state, action);
+      break;
+    case REQUEST_DELETE_ARTICLE_SUCCESS:
+      nextState = deleteArticleSuccess(state, action);
       break;
     default:
-      // eslint-disable-line
+      nextState = state;
   }
+
+  return nextState;
+}
+
+
+function getArticlesSuccess(state, action) {
+  let data = action.data.map(function (article) {
+    return article.id;
+  });
+
+  let nextState = {...state, ...{
+    data: [...data],
+    status: 'success',
+    page: action.page,
+    perPage: action.perPage,
+    message: action.message
+  }};
+
+  return nextState;
+}
+
+
+function deleteArticleSuccess(state, action) {
+  let nextState = {...state, ...{
+    status: 'success',
+    message: action.message
+  }};
+
+  nextState.data = nextState.data.filter(function (item) {
+    return item !== action.id;
+  });
 
   return nextState;
 }

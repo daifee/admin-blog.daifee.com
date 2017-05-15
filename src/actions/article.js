@@ -9,7 +9,7 @@ import {
 import store from '../store';
 import * as servicesArticle from '../services/article';
 
-export function requestDeleteArticle(id, message = '正在删除') {
+function requestDelete(id, message = '正在删除...') {
   let action = {
     type: REQUEST_DELETE_ARTICLE,
     id,
@@ -19,7 +19,7 @@ export function requestDeleteArticle(id, message = '正在删除') {
   store.dispatch(action);
 }
 
-export function requestDeleteArticleSuccess(id, message = '操作成功') {
+function requestDeleteSuccess(id, message = '删除成功！') {
   let action = {
     type: REQUEST_DELETE_ARTICLE_SUCCESS,
     message,
@@ -29,7 +29,7 @@ export function requestDeleteArticleSuccess(id, message = '操作成功') {
   store.dispatch(action);
 }
 
-export function requestDeleteArticleFailure(id, message = '操作失败') {
+function requestDeleteFailure(id, message = '删除失败！') {
   let action = {
     type: REQUEST_DELETE_ARTICLE_FAILURE,
     id,
@@ -40,13 +40,13 @@ export function requestDeleteArticleFailure(id, message = '操作失败') {
 }
 
 
-export function deleteById(id) {
-  requestDeleteArticle(id);
-  return servicesArticle.deleteById(id).then(function (article) {
-    requestDeleteArticleSuccess(id);
+export function del(id) {
+  requestDelete(id);
+  return servicesArticle.del(id).then(function (article) {
+    requestDeleteSuccess(id);
     return article;
   }).catch(function (err) {
-    requestDeleteArticleFailure(id);
+    requestDeleteFailure(id);
     throw err;
   });
 }

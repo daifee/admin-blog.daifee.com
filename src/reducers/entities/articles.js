@@ -1,6 +1,7 @@
 import {
   REQUEST_GET_ARTICLE_SUCCESS,
-  REQUEST_GET_ARTICLES_SUCCESS
+  REQUEST_GET_ARTICLES_SUCCESS,
+  REQUEST_DELETE_ARTICLE_SUCCESS
 } from '../../actionTypes';
 
 
@@ -18,6 +19,10 @@ export default function articles(state = {}, action) {
         let oldArticle = nextState[article.id] || {};
         return nextState[article.id] = {...oldArticle, ...article};
       });
+      break;
+    case REQUEST_DELETE_ARTICLE_SUCCESS:
+      nextState = {...nextState};
+      delete nextState[action.id];
       break;
     default:
       // eslint-disable-line

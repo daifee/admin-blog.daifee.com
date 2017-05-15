@@ -14,7 +14,17 @@
  */
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Table, Button, Menu, Dropdown, Icon, Modal} from 'antd';
+import {
+  message,
+  Table,
+  Button,
+  Menu,
+  Dropdown,
+  Icon,
+  Modal
+} from 'antd';
+import * as actionsArticle from '../../actions/article';
+
 const Column = Table.Column;
 
 
@@ -114,7 +124,7 @@ function handleMenuClick(e, article, history) {
       Modal.confirm({
         title: '恢复操作',
         content: '还不支持',
-        // content: `确定恢复文章：${article.name}?`,
+        // content: `确定恢复文章：${article.title}?`,
         onOk() {
           console.log('确定');
         }
@@ -123,9 +133,12 @@ function handleMenuClick(e, article, history) {
     case '4':
       Modal.confirm({
         title: '删除操作',
-        content: `确定删除文章：${article.name}?`,
+        content: `确定删除文章：${article.title}?`,
         onOk() {
-          console.log('确定');
+          actionsArticle.del(article.id).catch(function (err) {
+            message.error(err.message, 2);
+            console.error(err);
+          });
         }
       });
       break;
