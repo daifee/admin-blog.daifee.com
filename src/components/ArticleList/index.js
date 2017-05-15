@@ -135,7 +135,7 @@ function handleMenuClick(e, article, history) {
         title: '删除操作',
         content: `确定删除文章：${article.title}?`,
         onOk() {
-          actionsArticle.del(article.id).catch(function (err) {
+          actionsArticle.del(article.id, article.user.id).catch(function (err) {
             message.error(err.message, 2);
             console.error(err);
           });

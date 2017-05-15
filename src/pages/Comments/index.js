@@ -2,45 +2,12 @@
  * 评论列表
  */
 import React from 'react';
-import {Table, message} from 'antd';
+import {message} from 'antd';
 import ContentContainer from '../../components/ContentContainer';
+import CommentList from '../../components/CommentList';
 import * as actionsComments from '../../actions/comments';
 import getQueryPagination from '../../utils/getQueryPagination';
-import {Link} from 'react-router-dom';
 import connect from '../../utils/connectPage';
-
-
-const columns = [{
-  title: '作者',
-  dataIndex: 'user',
-  render(user) {
-    return (<Link to={`/users/${user.id}`}>{user.name}</Link>);
-  }
-}, {
-  title: '发布时间',
-  dataIndex: 'createdAt'
-}, {
-  title: '内容',
-  dataIndex: 'content'
-}, {
-  key: 'action',
-  title: '操作',
-  dataIndex: 'id',
-  render(id) {
-    return (
-      <span>
-        <a
-          href="#"
-          onClick={function (event) {
-            console.log('delete');
-            event.preventDefault();
-          }}>删除</a>
-        <span className="ant-divider" />
-        <Link to={`/comments/${id}`}>预览</Link>
-      </span>
-    );
-  }
-}];
 
 
 class Comments extends React.Component {
@@ -50,30 +17,14 @@ class Comments extends React.Component {
     let {list, history} = this.props;
     let {page, perPage, data, status} = list;
 
-    // 只显示下一页，没有了就不显示
-    let total = page * perPage;
-    if (data.length >= perPage) {
-      total++;
-    }
-
     return (
       <ContentContainer {...this.props}>
-        <Table
-          loading={status === 'pending' || status === 'init'}
-          columns={columns}
-          dataSource={data}
-          rowKey='id'
-          pagination={{
-            current: page,
-            pageSize: perPage,
-            total: total,
-            onChange: function (page) {
-              // 将分页操作插入历史记录
-              // router.push是同步操作
-              history.push(`/comments?page=${page}&perPage=${perPage}`);
-              // requestPageData();
-            }
-          }} />
+        <CommentList
+          history={history}
+          data={data}
+          page={page}
+          perPage={perPage}
+          status={status} />
       </ContentContainer>
     );
   }
