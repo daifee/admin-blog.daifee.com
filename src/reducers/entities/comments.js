@@ -6,15 +6,17 @@ import {
 
 
 export default function comments(state = {}, action) {
-  let nextState = state;
+  let nextState;
 
   switch (action.type) {
     case REQUEST_GET_COMMENT_SUCCESS:
       let comment = action.data;
-      let oldComment = nextState[comment.id] || {};
+      let oldComment = state[comment.id] || {};
+      nextState = {...state};
       nextState[comment.id] = {...oldComment, ...comment};
       break;
     case REQUEST_GET_COMMENTS_SUCCESS:
+      nextState = {...state};
       action.data.map(function (comment) {
         let oldComment = nextState[comment.id] || {};
         return nextState[comment.id] = {...oldComment, ...comment};
@@ -25,7 +27,7 @@ export default function comments(state = {}, action) {
       delete nextState[action.id];
       break;
     default:
-      // eslint-disable-line
+      nextState = state;
   }
 
   return nextState;

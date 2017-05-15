@@ -6,15 +6,17 @@ import {
 
 
 export default function articles(state = {}, action) {
-  let nextState = state;
+  let nextState;
 
   switch (action.type) {
     case REQUEST_GET_ARTICLE_SUCCESS:
       let article = action.data;
-      let oldArticle = nextState[article.id] || {};
+      let oldArticle = state[article.id] || {};
+      nextState = {...nextState};
       nextState[article.id] = {...oldArticle, ...article};
       break;
     case REQUEST_GET_ARTICLES_SUCCESS:
+      nextState = {...nextState};
       action.data.map(function (article) {
         let oldArticle = nextState[article.id] || {};
         return nextState[article.id] = {...oldArticle, ...article};
@@ -25,7 +27,7 @@ export default function articles(state = {}, action) {
       delete nextState[action.id];
       break;
     default:
-      // eslint-disable-line
+      nextState = state;
   }
 
   return nextState;

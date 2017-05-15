@@ -5,6 +5,7 @@ import React from 'react';
 import {message} from 'antd';
 import ContentContainer from '../../components/ContentContainer';
 import CommentList from '../../components/CommentList';
+import Authorization from '../../components/Authorization';
 import * as actionsComments from '../../actions/comments';
 import getQueryPagination from '../../utils/getQueryPagination';
 import connect from '../../utils/connectPage';
@@ -14,18 +15,20 @@ class Comments extends React.Component {
   unlinstenRouter = null;
 
   render() {
-    let {list, history} = this.props;
+    let {list, history, session} = this.props;
     let {page, perPage, data, status} = list;
 
     return (
-      <ContentContainer {...this.props}>
-        <CommentList
-          history={history}
-          data={data}
-          page={page}
-          perPage={perPage}
-          status={status} />
-      </ContentContainer>
+      <Authorization session={session} history={history}>
+        <ContentContainer {...this.props}>
+          <CommentList
+            history={history}
+            data={data}
+            page={page}
+            perPage={perPage}
+            status={status} />
+        </ContentContainer>
+      </Authorization>
     );
   }
 
@@ -57,7 +60,8 @@ class Comments extends React.Component {
 
 export default connect(function (state) {
   let props = {
-    list: {...state.pages.comments.list}
+    list: {...state.pages.comments.list},
+    session: state.session
   };
   let entities = state.entities;
 

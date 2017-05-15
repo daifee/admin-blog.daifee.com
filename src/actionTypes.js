@@ -15,6 +15,10 @@ module.exports = keyMirror({
   LOGIN_REQUEST_SUCCESS: null,
   LOGIN_REQUEST_FAILURE: null,
 
+  /**
+   * 文章
+   */
+
   REQUEST_GET_ARTICLES: null,
   REQUEST_GET_ARTICLES_SUCCESS: null,
   REQUEST_GET_ARTICLES_FAILURE: null,
@@ -27,6 +31,10 @@ module.exports = keyMirror({
   REQUEST_DELETE_ARTICLE_SUCCESS: null,
   REQUEST_DELETE_ARTICLE_FAILURE: null,
 
+  /**
+   * 用户
+   */
+
   REQUEST_GET_USERS: null,
   REQUEST_GET_USERS_SUCCESS: null,
   REQUEST_GET_USERS_FAILURE: null,
@@ -34,6 +42,14 @@ module.exports = keyMirror({
   REQUEST_GET_USER: null,
   REQUEST_GET_USER_SUCCESS: null,
   REQUEST_GET_USER_FAILURE: null,
+
+  REQUEST_DELETE_USER: null,
+  REQUEST_DELETE_USER_SUCCESS: null,
+  REQUEST_DELETE_USER_FAILURE: null,
+
+  /**
+   * 评论
+   */
 
   REQUEST_GET_COMMENTS: null,
   REQUEST_GET_COMMENTS_SUCCESS: null,
