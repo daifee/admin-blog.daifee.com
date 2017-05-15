@@ -110,7 +110,7 @@ class Articles extends React.Component {
 
 export default connect(function (state) {
   let props = {
-    list: state.pages.articles.list
+    list: {...state.pages.articles.list}
   };
   let entities = state.entities;
 

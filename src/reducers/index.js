@@ -11,10 +11,17 @@
  * }
  * ```
  */
+import entitiesArticles from './entities/articles';
+import entitiesComments from './entities/comments';
+import entitiesUsers from './entities/users';
+
 import pagesLogin from './pages/login';
 import pagesArticles from './pages/articles';
+import pagesComments from './pages/comments';
+import pagesUsers from './pages/users';
+
 import session from './session';
-import entitiesArticles from './entities/articles';
+
 
 
 const DEFAULT_STATE = {
@@ -27,7 +34,9 @@ const DEFAULT_STATE = {
  * 返回store的根reducer
  */
 export default function reducers(state = DEFAULT_STATE, action = {}) {
-  return {
+  state = {...DEFAULT_STATE, ...state};
+
+  let nextState = {
     /**
      * 实体数据：
      * 对应数据库、接口返回的数据
@@ -35,8 +44,8 @@ export default function reducers(state = DEFAULT_STATE, action = {}) {
      */
     entities: {
       articles: entitiesArticles(state.entities.articles, action),
-      comments: {},
-      users: {}
+      comments: entitiesComments(state.entities.comments, action),
+      users: entitiesUsers(state.entities.users, action)
     },
 
     /**
@@ -48,14 +57,16 @@ export default function reducers(state = DEFAULT_STATE, action = {}) {
       articleEdit: {},
       articles: pagesArticles(state.pages.articles, action),
       comment: {},
-      comments: {},
+      comments: pagesComments(state.pages.comments, action),
       user: {},
       userEdit: {},
-      users: {},
+      users: pagesUsers(state.pages.users, action),
       notFound: {}
     },
 
     // 当前会话用户
     session: session(state.session, action)
   };
+
+  return nextState;
 }

@@ -10,11 +10,13 @@ import {
 import './style.css';
 import * as actionsLogin from '../../actions/login';
 import {message} from 'antd';
+import connect from '../../utils/connectPage';
 
-export default class Login extends Component {
+
+class Login extends Component {
   handleSubmit = (event) => {
-    let {pages, history} = this.props;
-    let {name, password} = pages.login.data;
+    let {data, history} = this.props;
+    let {name, password} = data;
 
     let hideLoading = message.loading('正在登录', 0);
 
@@ -42,8 +44,8 @@ export default class Login extends Component {
   };
 
   render() {
-    let {pages} = this.props;
-    let {name, password} = pages.login.data;
+    let {data} = this.props;
+    let {name, password} = data;
 
     return (
       <div id="login">
@@ -77,3 +79,9 @@ export default class Login extends Component {
 }
 
 
+
+export default connect(function (state) {
+  let props = {...state.pages.login};
+
+  return props;
+}, Login);

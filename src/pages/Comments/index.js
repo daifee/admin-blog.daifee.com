@@ -11,9 +11,6 @@ import connect from '../../utils/connectPage';
 
 
 const columns = [{
-  title: '标题',
-  dataIndex: 'title'
-}, {
   title: '作者',
   dataIndex: 'user',
   render(user) {
@@ -22,6 +19,9 @@ const columns = [{
 }, {
   title: '发布时间',
   dataIndex: 'createdAt'
+}, {
+  title: '内容',
+  dataIndex: 'content'
 }, {
   key: 'action',
   title: '操作',
@@ -43,7 +43,7 @@ const columns = [{
 }];
 
 
-class comments extends React.Component {
+class Comments extends React.Component {
   unlinstenRouter = null;
 
   render() {
@@ -97,6 +97,7 @@ class comments extends React.Component {
 
     actionsComments.fetch(page, perPage).catch(function (err) {
       message.error(err.message, 2);
+      console.error(err);
     });
   }
 }
@@ -105,7 +106,7 @@ class comments extends React.Component {
 
 export default connect(function (state) {
   let props = {
-    list: state.pages.comments.list
+    list: {...state.pages.comments.list}
   };
   let entities = state.entities;
 
@@ -114,4 +115,4 @@ export default connect(function (state) {
   });
 
   return props;
-}, comments);
+}, Comments);

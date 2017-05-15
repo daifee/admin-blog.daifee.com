@@ -16,10 +16,13 @@ export function set(store) {
     return function (action) {
       next(action);
 
-      // let state = store.getState();
-      // state = JSON.stringify(state);
+      let state = store.getState();
+      let localState = {
+        session: state.session
+      };
 
-      // localStorage.setItem(key, state);
+      localState = JSON.stringify(localState);
+      localStorage.setItem(key, localState);
     }
   }
 }
