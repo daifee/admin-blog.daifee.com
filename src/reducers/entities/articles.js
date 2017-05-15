@@ -19,6 +19,8 @@ export default function articles(state = {}, action) {
         return nextState[article.id] = {...oldArticle, ...article};
       });
       break;
+    default:
+      // eslint-disable-line
   }
 
   return nextState;

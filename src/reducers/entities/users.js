@@ -19,6 +19,8 @@ export default function users(state = {}, action) {
         return nextState[user.id] = {...oldUser, ...user};
       });
       break;
+    default:
+      // eslint-disable-line
   }
 
   return nextState;

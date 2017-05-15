@@ -51,6 +51,8 @@ function list(state = DEFAULT_LIST_STATE, action) {
         message: action.message
       }};
       break;
+    default:
+      // eslint-disable-line
   }
 
   return nextState;

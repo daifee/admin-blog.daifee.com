@@ -19,6 +19,8 @@ export default function comments(state = {}, action) {
         return nextState[comment.id] = {...oldComment, ...comment};
       });
       break;
+    default:
+      // eslint-disable-line
   }
 
   return nextState;

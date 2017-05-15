@@ -41,6 +41,8 @@ export default function login(state = DEFAULT_STATE, action) {
         message: action.message
       }};
       break;
+    default:
+      // eslint-disable-line
   }
 
   return nextState;

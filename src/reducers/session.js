@@ -12,6 +12,8 @@ export default function session(state = null, action) {
     case LOGIN_REQUEST_SUCCESS:
       nextState = action.data;
     break;
+    default:
+      // eslint-disable-line
   }
 
   return nextState;
