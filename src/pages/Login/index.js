@@ -76,12 +76,23 @@ class Login extends Component {
       </div>
     );
   }
+
+  componentWillMount() {
+    let {session, history} = this.props;
+
+    if (session && session.token) {
+      history.replace('/articles');
+    }
+  }
 }
 
 
 
 export default connect(function (state) {
-  let props = {...state.pages.login};
+  let props = {
+    ...state.pages.login,
+    session: state.session
+  };
 
   return props;
 }, Login);
