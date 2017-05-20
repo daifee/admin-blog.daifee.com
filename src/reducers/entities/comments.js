@@ -23,7 +23,7 @@ export default function comments(state = {}, action) {
       });
       break;
     case REQUEST_DELETE_COMMENT_SUCCESS:
-      nextState = {...nextState};
+      nextState = {...state};
       delete nextState[action.id];
       break;
     default:

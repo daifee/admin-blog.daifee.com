@@ -35,12 +35,12 @@ class Articles extends React.Component {
   }
 
   render() {
-    let {list, session, history} = this.props;
+    let {list, session, history, location} = this.props;
     let {page, perPage, data, status} = list;
 
     return (
       <Authorization session={session} history={history}>
-        <ContentContainer {...this.props}>
+        <ContentContainer title='文章列表' location={location}>
           <ArticleList
             data={data}
             page={page}

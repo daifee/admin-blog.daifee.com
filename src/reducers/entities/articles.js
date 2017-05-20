@@ -12,18 +12,18 @@ export default function articles(state = {}, action) {
     case REQUEST_GET_ARTICLE_SUCCESS:
       let article = action.data;
       let oldArticle = state[article.id] || {};
-      nextState = {...nextState};
+      nextState = {...state};
       nextState[article.id] = {...oldArticle, ...article};
       break;
     case REQUEST_GET_ARTICLES_SUCCESS:
-      nextState = {...nextState};
+      nextState = {...state};
       action.data.map(function (article) {
         let oldArticle = nextState[article.id] || {};
         return nextState[article.id] = {...oldArticle, ...article};
       });
       break;
     case REQUEST_DELETE_ARTICLE_SUCCESS:
-      nextState = {...nextState};
+      nextState = {...state};
       delete nextState[action.id];
       break;
     default:

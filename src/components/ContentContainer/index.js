@@ -10,7 +10,7 @@ const {Content, Footer, Sider} = Layout;
 
 
 export default function ContentContainer(props) {
-  const {location, children} = props;
+  const {location, title, children} = props;
 
   return (
     <Layout>
@@ -20,7 +20,7 @@ export default function ContentContainer(props) {
       </Sider>
       <Layout>
         <Content style={{ margin: '0 16px' }}>
-          <h2>标题</h2>
+          <h2>{title}</h2>
           {children}
         </Content>
         <Footer style={{ textAlign: 'center' }}>

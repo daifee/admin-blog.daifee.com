@@ -87,13 +87,13 @@ export default class ArticleList extends React.Component {
             render={this.renderUserLink} />
           <Column key='createdAt' title='创建时间' dataIndex='createdAt' />
           <Column key='updatedAt' title='更新时间' dataIndex='updatedAt' />
-          <Column key='status' title='状态' dataIndex='status' />
           <Column
             key='commentNum'
             title='评论数量'
             dataIndex='commentNum'
             render={this.renderCommentsLink} />
           <Column key='views' title='阅读数量' dataIndex='views' />
+          <Column key='status' title='状态' dataIndex='status' />
           <Column
             key='action'
             title='操作'

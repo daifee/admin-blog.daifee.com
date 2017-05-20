@@ -15,12 +15,12 @@ class Users extends React.Component {
   unlinstenRouter = null;
 
   render() {
-    let {list, history, session} = this.props;
+    let {list, history, location, session} = this.props;
     let {page, perPage, data, status} = list;
 
     return (
       <Authorization session={session} history={history}>
-        <ContentContainer {...this.props}>
+        <ContentContainer location={location} title='用户列表'>
           <UserList
             history={history}
             data={data}
