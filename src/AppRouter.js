@@ -32,7 +32,7 @@ export default function () {
 
           <Route exact path='/articles' component={Articles} />
           <Route exact path='/articles/:id/edit' component={ArticleEdit} />
-          <Route exact path='/article/:id' component={Article} />
+          <Route exact path='/articles/:id' component={Article} />
 
           <Route exact path='/comments' component={Comments} />
           <Route exact path='/comments/:id' component={Comment} />

@@ -19,6 +19,7 @@ import pagesLogin from './pages/login';
 import pagesArticles from './pages/articles';
 import pagesComments from './pages/comments';
 import pagesUsers from './pages/users';
+import pagesArticle from './pages/article';
 
 import session from './session';
 
@@ -53,7 +54,7 @@ export default function reducers(state = DEFAULT_STATE, action = {}) {
      */
     pages: {
       login: pagesLogin(state.pages.login, action),
-      article: {},
+      article: pagesArticle(state.pages.article, action),
       articleEdit: {},
       articles: pagesArticles(state.pages.articles, action),
       comment: {},

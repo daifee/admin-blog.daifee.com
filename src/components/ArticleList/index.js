@@ -36,10 +36,11 @@ export default class ArticleList extends React.Component {
   };
 
   renderAction = (article) => {
-    let {history} = this.props;
+    let {history, pagination} = this.props;
+    // 详情页不分页，不可再预览，所以可以根据 pagination 判断是否属于详情页
     let menu = (
         <Menu onClick={(e) => handleMenuClick(e, article, history)}>
-          <Menu.Item key="1">预览</Menu.Item>
+          {pagination !== false ? (<Menu.Item key="1">预览</Menu.Item>) : null}
           <Menu.Item key="2">编辑</Menu.Item>
           {
             article.status === 'deleted'
@@ -59,7 +60,7 @@ export default class ArticleList extends React.Component {
   };
 
   render() {
-    let {data, page, perPage, status} = this.props;
+    let {data, page, perPage, status, pagination} = this.props;
 
     // 只显示下一页，没有了就不显示
     let total = page * perPage;
@@ -67,39 +68,44 @@ export default class ArticleList extends React.Component {
       total++;
     }
 
-      return (
-        <Table
-          rowKey='id'
-          loading={status === 'pending' || status === 'init'}
-          dataSource={data}
-          pagination={{
-            current: page,
-            pageSize: perPage,
-            total: total,
-            onChange: this.handlePaginate
-          }}>
+    if (pagination !== false) {
+      pagination = {
+        current: page,
+        pageSize: perPage,
+        total: total,
+        onChange: this.handlePaginate
+      };
+    }
 
-          <Column key='title' title='标题' dataIndex='title' />
-          <Column
-            key='user'
-            title='作者'
-            dataIndex='user'
-            render={this.renderUserLink} />
-          <Column key='createdAt' title='创建时间' dataIndex='createdAt' />
-          <Column key='updatedAt' title='更新时间' dataIndex='updatedAt' />
-          <Column
-            key='commentNum'
-            title='评论数量'
-            dataIndex='commentNum'
-            render={this.renderCommentsLink} />
-          <Column key='views' title='阅读数量' dataIndex='views' />
-          <Column key='status' title='状态' dataIndex='status' />
-          <Column
-            key='action'
-            title='操作'
-            render={this.renderAction} />
-        </Table>
-      );
+
+    return (
+      <Table
+        rowKey='id'
+        loading={status === 'pending' || status === 'init'}
+        dataSource={data}
+        pagination={pagination}>
+
+        <Column key='title' title='标题' dataIndex='title' />
+        <Column
+          key='user'
+          title='作者'
+          dataIndex='user'
+          render={this.renderUserLink} />
+        <Column key='createdAt' title='创建时间' dataIndex='createdAt' />
+        <Column key='updatedAt' title='更新时间' dataIndex='updatedAt' />
+        <Column
+          key='commentNum'
+          title='评论数量'
+          dataIndex='commentNum'
+          render={this.renderCommentsLink} />
+        <Column key='views' title='阅读数量' dataIndex='views' />
+        <Column key='status' title='状态' dataIndex='status' />
+        <Column
+          key='action'
+          title='操作'
+          render={this.renderAction} />
+      </Table>
+    );
   }
 
   renderUserLink(user) {

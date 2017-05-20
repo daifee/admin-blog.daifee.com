@@ -19,7 +19,7 @@ export default function articles(state = {}, action) {
 const DEFAULT_LIST_STATE = {
   data: [],
   status: 'init',
-  message: '',
+  message: 'init',
   page: 1,
   perPage: 20
 };

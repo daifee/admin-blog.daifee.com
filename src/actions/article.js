@@ -2,6 +2,10 @@
  * actions of article
  */
 import {
+  REQUEST_GET_ARTICLE,
+  REQUEST_GET_ARTICLE_SUCCESS,
+  REQUEST_GET_ARTICLE_FAILURE,
+
   REQUEST_DELETE_ARTICLE,
   REQUEST_DELETE_ARTICLE_FAILURE,
   REQUEST_DELETE_ARTICLE_SUCCESS
@@ -9,35 +13,24 @@ import {
 import store from '../store';
 import * as servicesArticle from '../services/article';
 
-function requestDelete(id, message = '正在删除...') {
-  let action = {
-    type: REQUEST_DELETE_ARTICLE,
-    id,
-    message
-  };
 
-  store.dispatch(action);
+// 生成action
+function createRequestAction(type, defaultMessage = '正在请求数据...') {
+  return function (id, message = defaultMessage) {
+    let action = {type, id, message};
+
+    store.dispatch(action);
+  }
 }
 
-function requestDeleteSuccess(id, message = '删除成功！') {
-  let action = {
-    type: REQUEST_DELETE_ARTICLE_SUCCESS,
-    message,
-    id
-  };
+// 开始删除
+const requestDelete = createRequestAction(REQUEST_DELETE_ARTICLE, '正在删除...');
 
-  store.dispatch(action);
-}
+// 删除成功
+const requestDeleteSuccess = createRequestAction(REQUEST_DELETE_ARTICLE_SUCCESS, '请求成功！');
 
-function requestDeleteFailure(id, message = '删除失败！') {
-  let action = {
-    type: REQUEST_DELETE_ARTICLE_FAILURE,
-    id,
-    message
-  };
-
-  store.dispatch(action);
-}
+// 删除失败
+const requestDeleteFailure = createRequestAction(REQUEST_DELETE_ARTICLE_FAILURE, '删除失败！');
 
 
 export function del(id, userId) {
@@ -50,3 +43,37 @@ export function del(id, userId) {
     throw err;
   });
 }
+
+
+
+// 开始请求
+const requestGet = createRequestAction(REQUEST_GET_ARTICLE);
+
+// 请求成功
+const requestGetSuccess = function (data, message = '请求成功！') {
+  let action = {
+    type: REQUEST_GET_ARTICLE_SUCCESS,
+    data,
+    message
+  };
+
+  store.dispatch(action);
+};
+
+// 请求失败
+const requestGetFailure = createRequestAction(REQUEST_GET_ARTICLE_FAILURE, '请求失败');
+
+
+export function getOneById(id) {
+  requestGet(id);
+  return servicesArticle.getOneById(id).then(function (article) {
+    requestGetSuccess(article);
+    return article;
+  }).catch(function (err) {
+    requestGetFailure(id, err.message);
+    throw err;
+  });
+}
+
+
+
