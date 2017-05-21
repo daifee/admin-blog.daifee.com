@@ -9,6 +9,7 @@ import {
   Button,
   Col
 } from 'antd';
+import Authorization from '../../components/Authorization';
 import connect from '../../utils/connectPage';
 import * as actionArticle from '../../actions/article';
 import './style.css';
@@ -39,7 +40,7 @@ class ArticleEdit extends React.Component {
   };
 
   render() {
-    let {session, article} = this.props;
+    let {session, article, history} = this.props;
     let data = article.data;
 
     if (!data) {
@@ -47,31 +48,33 @@ class ArticleEdit extends React.Component {
     }
 
     return (
-      <Form id='article-edit' onSubmit={this.handleSubmit}>
-        <Form.Item className='title-section'>
-          <Col span={17}>
-            <Input
-              size='large'
-              autoFocus
-              onChange={this.handleChangeTitle}
-              value={data.title} />
-          </Col>
-          <Col span={1}></Col>
-          <Col span={6}>
-            <Button size='large' type='primary' htmlType='submit'>提 交</Button>
-          </Col>
-        </Form.Item>
+      <Authorization session={session} history={history}>
+        <Form id='article-edit' onSubmit={this.handleSubmit}>
+          <Form.Item className='title-section'>
+            <Col span={17}>
+              <Input
+                size='large'
+                autoFocus
+                onChange={this.handleChangeTitle}
+                value={data.title} />
+            </Col>
+            <Col span={1}></Col>
+            <Col span={6}>
+              <Button size='large' type='primary' htmlType='submit'>提 交</Button>
+            </Col>
+          </Form.Item>
 
-        <Form.Item>
-          <Col>
-            <div id="editormd" ref={(node) => this.editor = node}>
-              <textarea
-                style={{display: 'none'}}
-                value={data.content} />
-            </div>
-          </Col>
-        </Form.Item>
-      </Form>
+          <Form.Item>
+            <Col>
+              <div id="editormd" ref={(node) => this.editor = node}>
+                <textarea
+                  style={{display: 'none'}}
+                  value={data.content} />
+              </div>
+            </Col>
+          </Form.Item>
+        </Form>
+      </Authorization>
     );
   }
 
