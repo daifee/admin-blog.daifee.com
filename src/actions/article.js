@@ -10,6 +10,10 @@ import {
   REQUEST_DELETE_ARTICLE_FAILURE,
   REQUEST_DELETE_ARTICLE_SUCCESS,
 
+  REQUEST_PATCH_ARTICLE,
+  REQUEST_PATCH_ARTICLE_FAILURE,
+  REQUEST_PATCH_ARTICLE_SUCCESS,
+
   EDIT_ARTICLE
 } from '../actionTypes';
 import store from '../store';
@@ -86,4 +90,38 @@ export function edit(article) {
   };
 
   store.dispatch(action);
+}
+
+
+
+
+// 开始更新
+const requestUpdate = createRequestAction(REQUEST_PATCH_ARTICLE, '正在更新...');
+
+// 更新成功
+const requestUpdateSuccess = function (data, message = '更新成功！') {
+  let action = {
+    type: REQUEST_PATCH_ARTICLE_SUCCESS,
+    data,
+    message
+  };
+
+  store.dispatch(action);
+};
+
+// 更新失败
+const requestUpdateFailure = createRequestAction(REQUEST_PATCH_ARTICLE_FAILURE, '更新失败！');
+
+
+
+
+export function update(id, userId, article) {
+  requestUpdate(id);
+  return servicesArticle.update(id, userId, article).then(function (article) {
+    requestUpdateSuccess(article);
+    return article;
+  }).catch(function (err) {
+    requestUpdateFailure(id);
+    throw err;
+  });
 }

@@ -7,7 +7,8 @@ import {
   Form,
   Input,
   Button,
-  Col
+  Col,
+  message
 } from 'antd';
 import Authorization from '../../components/Authorization';
 import connect from '../../utils/connectPage';
@@ -32,9 +33,19 @@ class ArticleEdit extends React.Component {
   };
 
   handleSubmit = (e) => {
-    let {article} = this.props;
+    let {article, history} = this.props;
+    article = article.data;
 
-    console.log(article);
+    let hide = message.loading('更新中...');
+    actionArticle.update(article.id, article.user.id, article).then(function () {
+      hide();
+      message.success('更新成功！', 2, function () {
+        history.replace(`/articles/${article.id}`);
+      });
+    }).catch(function (err) {
+      message.error(err.message);
+      hide();
+    });
 
     e.preventDefault();
   };
@@ -69,7 +80,8 @@ class ArticleEdit extends React.Component {
               <div id="editormd" ref={(node) => this.editor = node}>
                 <textarea
                   style={{display: 'none'}}
-                  value={data.content} />
+                  value={data.content}
+                  onChange={() => {/* editor已经提供 */}} />
               </div>
             </Col>
           </Form.Item>
@@ -87,7 +99,12 @@ class ArticleEdit extends React.Component {
   fetchArticle() {
     let {params} = this.props.match;
 
-    actionArticle.getOneById(params.id).catch(function (err) {
+    let hide = message.loading('正在加载...');
+    actionArticle.getOneById(params.id).then(function () {
+      hide();
+    }).catch(function (err) {
+      hide();
+      message.error(err.message);
       console.error(err);
     });
   }

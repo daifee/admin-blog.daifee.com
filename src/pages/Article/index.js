@@ -9,6 +9,7 @@ import Authorization from '../../components/Authorization';
 import connect from '../../utils/connectPage';
 import * as actionArticle from '../../actions/article';
 import marked from 'marked';
+import {message} from 'antd';
 
 
 class Article extends React.Component {
@@ -54,7 +55,12 @@ class Article extends React.Component {
   componentDidMount() {
     let {params} = this.props.match;
 
-    actionArticle.getOneById(params.id).catch(function (err) {
+    let hide = message.loading('正在加载...');
+    actionArticle.getOneById(params.id).then(function () {
+      hide();
+    }).catch(function (err) {
+      hide();
+      message.error(err.message);
       console.error(err);
     });
   }

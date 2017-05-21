@@ -1,7 +1,8 @@
 import {
   REQUEST_GET_ARTICLE_SUCCESS,
   REQUEST_GET_ARTICLES_SUCCESS,
-  REQUEST_DELETE_ARTICLE_SUCCESS
+  REQUEST_DELETE_ARTICLE_SUCCESS,
+  REQUEST_PATCH_ARTICLE_SUCCESS
 } from '../../actionTypes';
 
 
@@ -10,6 +11,7 @@ export default function articles(state = {}, action) {
 
   switch (action.type) {
     case REQUEST_GET_ARTICLE_SUCCESS:
+    case REQUEST_PATCH_ARTICLE_SUCCESS:
       let article = action.data;
       let oldArticle = state[article.id] || {};
       nextState = {...state};
