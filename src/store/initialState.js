@@ -1,7 +1,7 @@
 /**
  * 缓存在本地的state，作为initState
  */
-const key = 'backend-blog.daifee.com-state';
+const key = 'admin-blog.daifee.com-state';
 
 export function get() {
   let state = localStorage.getItem(key);
