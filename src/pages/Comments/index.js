@@ -20,7 +20,7 @@ class Comments extends React.Component {
 
     return (
       <Authorization session={session} history={history}>
-        <ContentContainer location={location} title='评论列表'>
+        <ContentContainer location={location} title='评论列表' history={history}>
           <CommentList
             history={history}
             data={data}

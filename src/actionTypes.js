@@ -15,6 +15,8 @@ module.exports = keyMirror({
   LOGIN_REQUEST_SUCCESS: null,
   LOGIN_REQUEST_FAILURE: null,
 
+  LOGOUT: null,
+
   /**
    * 文章
    */

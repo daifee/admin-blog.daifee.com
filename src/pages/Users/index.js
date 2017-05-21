@@ -20,7 +20,7 @@ class Users extends React.Component {
 
     return (
       <Authorization session={session} history={history}>
-        <ContentContainer location={location} title='用户列表'>
+        <ContentContainer location={location} title='用户列表' history={history}>
           <UserList
             history={history}
             data={data}

@@ -27,7 +27,7 @@ class Article extends React.Component {
 
     return (
       <Authorization session={session} history={history}>
-        <ContentContainer title='文章详情' location={location}>
+        <ContentContainer title='文章详情' location={location} history={history}>
           <div>
             <ArticleList
             pagination={false}

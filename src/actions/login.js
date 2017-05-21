@@ -3,7 +3,9 @@ import {
   LOGIN_INPUT,
   LOGIN_REQUEST,
   LOGIN_REQUEST_SUCCESS,
-  LOGIN_REQUEST_FAILURE
+  LOGIN_REQUEST_FAILURE,
+
+  LOGOUT
 } from '../actionTypes';
 import * as servicesUser from '../services/user';
 
@@ -74,6 +76,15 @@ function requestFailure(message) {
   let action = {
     type: LOGIN_REQUEST_FAILURE,
     message: message
+  };
+
+  store.dispatch(action);
+}
+
+
+export function logout() {
+  let action = {
+    type: LOGOUT
   };
 
   store.dispatch(action);

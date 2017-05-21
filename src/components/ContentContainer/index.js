@@ -10,13 +10,13 @@ const {Content, Footer, Sider} = Layout;
 
 
 export default function ContentContainer(props) {
-  const {location, title, children} = props;
+  const {location, history, title, children} = props;
 
   return (
     <Layout>
       <Sider collapsible>
         <div className="logo">后台</div>
-        <LeftMenu location={location} />
+        <LeftMenu location={location} history={history} />
       </Sider>
       <Layout>
         <Content style={{ margin: '0 16px' }}>

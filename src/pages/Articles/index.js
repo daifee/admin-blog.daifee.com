@@ -40,7 +40,7 @@ class Articles extends React.Component {
 
     return (
       <Authorization session={session} history={history}>
-        <ContentContainer title='文章列表' location={location}>
+        <ContentContainer title='文章列表' location={location} history={history}>
           <ArticleList
             data={data}
             page={page}
