@@ -6,6 +6,7 @@ export PUBLIC_URL
 npm run build-css
 react-scripts build
 
+rm -rf ./docs
 cp -r ./build ./docs
 
 master:remote/master
