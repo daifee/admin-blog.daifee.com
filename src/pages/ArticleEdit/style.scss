@@ -1,0 +1,20 @@
+
+
+#article-edit {
+
+  .ant-form-item {
+    margin-bottom: 0px;
+  }
+
+  .title-section {
+    button {
+      // display: block;
+      width: 100%;
+    }
+
+    &.ant-form-item {
+      padding-top: 8px;
+      margin-bottom: 8px;
+    }
+  }
+}

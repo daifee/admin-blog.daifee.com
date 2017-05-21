@@ -54,18 +54,10 @@ class Article extends React.Component {
   componentDidMount() {
     let {params} = this.props.match;
 
-    actionArticle.getOneById(params.id);
+    actionArticle.getOneById(params.id).catch(function (err) {
+      console.error(err);
+    });
   }
-
-  // componentDidUpdate() {
-  //   let {article} = this.props;
-
-  //   if (article.data) {
-  //     window.editormd.markdownToHTML(this.markdown, {
-  //         markdown: article.data.content
-  //     });
-  //   }
-  // }
 }
 
 

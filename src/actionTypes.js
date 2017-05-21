@@ -31,6 +31,8 @@ module.exports = keyMirror({
   REQUEST_DELETE_ARTICLE_SUCCESS: null,
   REQUEST_DELETE_ARTICLE_FAILURE: null,
 
+  EDIT_ARTICLE: null,
+
   /**
    * 用户
    */

@@ -8,7 +8,9 @@ import {
 
   REQUEST_DELETE_ARTICLE,
   REQUEST_DELETE_ARTICLE_FAILURE,
-  REQUEST_DELETE_ARTICLE_SUCCESS
+  REQUEST_DELETE_ARTICLE_SUCCESS,
+
+  EDIT_ARTICLE
 } from '../actionTypes';
 import store from '../store';
 import * as servicesArticle from '../services/article';
@@ -77,3 +79,11 @@ export function getOneById(id) {
 
 
 
+export function edit(article) {
+  let action = {
+    type: EDIT_ARTICLE,
+    data: article
+  };
+
+  store.dispatch(action);
+}
