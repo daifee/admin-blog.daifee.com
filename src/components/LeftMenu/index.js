@@ -5,18 +5,18 @@ import React from 'react';
 import {Menu} from 'antd';
 import {Link} from 'react-router-dom';
 import * as actionsLogin from '../../actions/login';
-
+import to from '../../utils/to';
 
 
 const data = [{
   name: '文章',
-  key: '/articles'
+  key: to('/articles')
 }, {
   name: '评论',
-  key: '/comments'
+  key: to('/comments')
 }, {
   name: '用户',
-  key: '/users'
+  key: to('/users')
 }];
 
 
@@ -36,7 +36,7 @@ export default function LeftMenu(props) {
     <Menu.Item key='logout'>
       <a onClick={function () {
         actionsLogin.logout();
-        history.replace('/');
+        history.replace(to('/'));
       }}>退出帐号</a>
     </Menu.Item>
   ));

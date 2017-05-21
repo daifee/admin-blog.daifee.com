@@ -24,6 +24,7 @@ import {
   Modal
 } from 'antd';
 import * as actionsArticle from '../../actions/article';
+import to from '../../utils/to';
 
 const Column = Table.Column;
 
@@ -32,7 +33,7 @@ const Column = Table.Column;
 export default class ArticleList extends React.Component {
   handlePaginate = (page) => {
     let {perPage, history} = this.props;
-    history.push(`/articles?page=${page}&perPage=${perPage}`);
+    history.push(to(`/articles?page=${page}&perPage=${perPage}`));
   };
 
   renderAction = (article) => {
@@ -109,11 +110,11 @@ export default class ArticleList extends React.Component {
   }
 
   renderUserLink(user) {
-    return (<Link to={`/users/${user.name}`}>{user.name}</Link>);
+    return (<Link to={to(`/users/${user.name}`)}>{user.name}</Link>);
   }
 
   renderCommentsLink(commentNum, article) {
-    return (<Link to={`/articles/${article.id}/comments`}>{commentNum}</Link>);
+    return (<Link to={to(`/articles/${article.id}/comments`)}>{commentNum}</Link>);
   }
 }
 
@@ -121,10 +122,10 @@ export default class ArticleList extends React.Component {
 function handleMenuClick(e, article, history) {
   switch (e.key) {
     case '1':
-      history.push(`/articles/${article.id}`);
+      history.push(to(`/articles/${article.id}`));
       break;
     case '2':
-      history.push(`/articles/${article.id}/edit`);
+      history.push(to(`/articles/${article.id}/edit`));
       break;
     case '3':
       Modal.confirm({

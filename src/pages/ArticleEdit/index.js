@@ -14,7 +14,7 @@ import Authorization from '../../components/Authorization';
 import connect from '../../utils/connectPage';
 import * as actionArticle from '../../actions/article';
 import './style.css';
-
+import to from '../../utils/to';
 
 class ArticleEdit extends React.Component {
   constructor(props) {
@@ -40,7 +40,7 @@ class ArticleEdit extends React.Component {
     actionArticle.update(article.id, article.user.id, article).then(function () {
       hide();
       message.success('更新成功！', 2, function () {
-        history.replace(`/articles/${article.id}`);
+        history.replace(to(`/articles/${article.id}`));
       });
     }).catch(function (err) {
       message.error(err.message);

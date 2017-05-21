@@ -24,13 +24,14 @@ import {
   Modal
 } from 'antd';
 import * as actionsUser from '../../actions/user';
+import to from '../../utils/to';
 
 const Column = Table.Column;
 
 export default class UserList extends React.Component {
   handlePaginate = (page) => {
     let {perPage, history} = this.props;
-    history.push(`/users?page=${page}&perPage=${perPage}`);
+    history.push(to(`/users?page=${page}&perPage=${perPage}`));
   };
 
   renderAction = (user) => {
@@ -100,7 +101,7 @@ export default class UserList extends React.Component {
   }
 
   renderArticlesLink(num, user) {
-    return (<Link to={`/users/${user.id}/articles`}>{num}</Link>);
+    return (<Link to={to(`/users/${user.id}/articles`)}>{num}</Link>);
   }
 }
 
@@ -110,10 +111,10 @@ export default class UserList extends React.Component {
 function handleMenuClick(e, user, history) {
   switch (e.key) {
     case '1':
-      history.push(`/users/${user.id}/comments`);
+      history.push(to(`/users/${user.id}/comments`));
       break;
     case '2':
-      history.push(`/users/${user.id}/edit`);
+      history.push(to(`/users/${user.id}/edit`));
       break;
     case '3':
       Modal.confirm({

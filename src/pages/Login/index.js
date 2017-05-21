@@ -11,7 +11,7 @@ import './style.css';
 import * as actionsLogin from '../../actions/login';
 import {message} from 'antd';
 import connect from '../../utils/connectPage';
-
+import to from '../../utils/to';
 
 class Login extends Component {
   handleSubmit = (event) => {
@@ -23,7 +23,7 @@ class Login extends Component {
     actionsLogin.login(name, password).then(function (user) {
       message.success('成功登录', 1.5, function () {
         // 重定向
-        history.replace('/articles');
+        history.replace(to('/articles'));
       });
     }).catch(function (err) {
       message.error(err.message, 2);
@@ -81,7 +81,7 @@ class Login extends Component {
     let {session, history} = this.props;
 
     if (session && session.token) {
-      history.replace('/articles');
+      history.replace(to('/articles'));
     }
   }
 }

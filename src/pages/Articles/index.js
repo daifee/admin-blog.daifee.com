@@ -11,7 +11,7 @@ import * as actionsArticles from '../../actions/articles';
 import getQueryPagination from '../../utils/getQueryPagination';
 // import {Link} from 'react-router-dom';
 import connect from '../../utils/connectPage';
-
+import to from '../../utils/to';
 
 
 class Articles extends React.Component {
@@ -20,7 +20,7 @@ class Articles extends React.Component {
   handlePaginate = (page) => {
     let {list, history} = this.props;
     let {perPage} = list;
-    history.push(`/articles?page=${page}&perPage=${perPage}`);
+    history.push(to(`/articles?page=${page}&perPage=${perPage}`));
   };
 
   requestPageData() {

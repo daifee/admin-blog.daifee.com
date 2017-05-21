@@ -18,6 +18,7 @@ import {
   Modal
 } from 'antd';
 import * as actionsComment from '../../actions/comment'
+import to from '../../utils/to';
 
 const columns = [
   {
@@ -25,7 +26,7 @@ const columns = [
     dataIndex: 'articleId',
     key: 'articleId',
     render(articleId) {
-      return (<Link to={`/articles/${articleId}`}>{articleId}</Link>);
+      return (<Link to={to(`/articles/${articleId}`)}>{articleId}</Link>);
     }
   },
   {
@@ -33,7 +34,7 @@ const columns = [
     dataIndex: 'user',
     key: 'user',
     render(user) {
-      return (<Link to={`/users/${user.name}`}>{user.name}</Link>);
+      return (<Link to={to(`/users/${user.name}`)}>{user.name}</Link>);
     }
   },
   {
@@ -102,7 +103,7 @@ function handleRestore(comment) {
 
 
 function handlePaginate(page, perPage, history) {
-  history.push(`/comments?page=${page}&per_page=${perPage}`);
+  history.push(to(`/comments?page=${page}&per_page=${perPage}`));
 }
 
 export default function CommentList(props) {

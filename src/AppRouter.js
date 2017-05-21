@@ -19,9 +19,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-
-const PUBLIC_URL = process.env.PUBLIC_URL;
-
+import to from './utils/to';
 
 
 export default function () {
@@ -29,18 +27,18 @@ export default function () {
     <Router>
       <div id='container'>
         <Switch>
-          <Route exact path={`${PUBLIC_URL}/`} component={Login} />
+          <Route exact path={to('/')} component={Login} />
 
-          <Route exact path={`${PUBLIC_URL}/articles`} component={Articles} />
-          <Route exact path={`${PUBLIC_URL}/articles/:id/edit`} component={ArticleEdit} />
-          <Route exact path={`${PUBLIC_URL}/articles/:id`} component={Article} />
+          <Route exact path={to('/articles')} component={Articles} />
+          <Route exact path={to('/articles/:id/edit')} component={ArticleEdit} />
+          <Route exact path={to('/articles/:id')} component={Article} />
 
-          <Route exact path={`${PUBLIC_URL}/comments`} component={Comments} />
-          <Route exact path={`${PUBLIC_URL}/comments/:id`} component={Comment} />
+          <Route exact path={to('/comments')} component={Comments} />
+          <Route exact path={to('/comments/:id')} component={Comment} />
 
-          <Route exact path={`${PUBLIC_URL}/users`} component={Users} />
-          <Route exact path={`${PUBLIC_URL}/users/:id/edit`} component={UserEdit} />
-          <Route exact path={`${PUBLIC_URL}/users/:id`} component={User} />
+          <Route exact path={to('/users')} component={Users} />
+          <Route exact path={to('/users/:id/edit')} component={UserEdit} />
+          <Route exact path={to('/users/:id')} component={User} />
 
           <Route component={NotFound} />
         </Switch>
