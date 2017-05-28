@@ -7,6 +7,7 @@ import * as http from '../utils/http';
 const {apiHost} = config;
 
 const COMMENTS = `${apiHost}/api/comments`;
+const SEARCH = `${apiHost}/api/comments/search`;
 const userSnippet = function (userId) {
   return `${apiHost}/api/users/${userId}/comments`;
 };
@@ -37,6 +38,11 @@ export function getById(id) {
 export function getList(page, perPage) {
   let url = `${COMMENTS}?page=${page}&per_page=${perPage}`;
   return http.get(url);
+}
+
+
+export function search(query) {
+  return http.get(SEARCH, query);
 }
 
 // 获取某用户的所有评论

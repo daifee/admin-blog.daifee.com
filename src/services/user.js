@@ -7,6 +7,7 @@ import * as http from '../utils/http';
 const {apiHost} = config;
 
 const USERS = `${apiHost}/api/users`;
+const SEARCH = `${apiHost}/api/users/search`;
 const AUTHENTICATION = `${apiHost}/api`;
 
 
@@ -20,6 +21,11 @@ export function authorize(name, password) {
 export function getList(page, perPage = 20) {
   let url = `${USERS}?page=${page}&per_page=${perPage}`;
   return http.get(url);
+}
+
+
+export function search(query) {
+  return http.get(SEARCH, query);
 }
 
 // 获取一个用户

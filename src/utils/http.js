@@ -4,6 +4,7 @@
  * Promise.reject(new HTTPError(message, code, status, responseBody));
  */
 import store from '../store';
+import qs from 'qs';
 
 /**
  * http层自定义的异常
@@ -84,7 +85,12 @@ function http(method, url = '', body) {
 }
 
 
-export function get(url) {
+export function get(url, query) {
+  if (query) {
+    query = qs.stringify(query);
+    url += url.indexOf('?') === -1 ? `?${query}` : `&${query}`;
+  }
+
   return http('GET', url);
 }
 

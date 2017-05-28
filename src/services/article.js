@@ -7,6 +7,7 @@ import * as http from '../utils/http';
 const {apiHost} = config;
 
 const ARTICLES = `${apiHost}/api/articles`;
+const SEARCH = `${apiHost}/api/articles/search`;
 const userSnippet = function (userId) {
   return `${apiHost}/api/users/${userId}/articles`;
 };
@@ -63,6 +64,10 @@ export function getOneById(id) {
 export function getList(page, perPage = 20) {
   let url = `${ARTICLES}?page=${page}&per_page=${perPage}`;
   return http.get(url);
+}
+
+export function search(query) {
+  return http.get(SEARCH, query);
 }
 
 /**
