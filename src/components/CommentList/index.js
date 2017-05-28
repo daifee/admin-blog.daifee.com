@@ -22,6 +22,11 @@ import to from '../../utils/to';
 
 const columns = [
   {
+    title: 'ID',
+    dataIndex: 'id',
+    key: 'id'
+  },
+  {
     title: '文章ID',
     dataIndex: 'articleId',
     key: 'articleId',

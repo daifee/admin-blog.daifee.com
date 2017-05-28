@@ -86,6 +86,7 @@ export default class ArticleList extends React.Component {
         dataSource={data}
         pagination={pagination}>
 
+        <Column key='id' title='ID' dataIndex='id' />
         <Column key='title' title='标题' dataIndex='title' />
         <Column
           key='user'

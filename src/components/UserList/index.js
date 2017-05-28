@@ -79,6 +79,7 @@ export default class UserList extends React.Component {
             onChange: this.handlePaginate
           }}>
 
+          <Column key='id' title='ID' dataIndex='id' />
           <Column key='name' title='用户名' dataIndex='name' />
           <Column key='email' title='邮箱' dataIndex='email' />
           <Column key='role' title='角色' dataIndex='role' />
