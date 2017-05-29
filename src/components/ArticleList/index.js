@@ -33,7 +33,7 @@ const Column = Table.Column;
 export default class ArticleList extends React.Component {
   handlePaginate = (page) => {
     let {perPage, history} = this.props;
-    history.push(to(`/articles?page=${page}&perPage=${perPage}`));
+    history.push(to(`/articles?page=${page}&per_page=${perPage}`));
   };
 
   renderAction = (article) => {
@@ -143,7 +143,8 @@ function handleMenuClick(e, article, history) {
         title: '删除操作',
         content: `确定删除文章：${article.title}?`,
         onOk() {
-          actionsArticle.del(article.id, article.user.id).catch(function (err) {
+          let userId = article.user.id;
+          actionsArticle.del(article.id, userId).catch(function (err) {
             message.error(err.message, 2);
             console.error(err);
           });

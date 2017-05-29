@@ -38,11 +38,19 @@ function requestFailure(message = '请求数据失败！') {
 }
 
 
-export function fetch(page, perPage = 20) {
+export function fetch(query) {
+  query = {
+    ...{
+      page: 1,
+      per_page: 20
+    },
+    ...query
+  };
+
   request();
 
-  return servicesArticle.getList(page, perPage).then(function (articles) {
-    requestSuccess(articles, page, perPage);
+  return servicesArticle.search(query).then(function (articles) {
+    requestSuccess(articles, query.page, query.perPage);
     return articles;
   }).catch(function (err) {
     requestFailure(err.message);

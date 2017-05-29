@@ -8,10 +8,11 @@ import ContentContainer from '../../components/ContentContainer';
 import Authorization from '../../components/Authorization';
 import ArticleList from '../../components/ArticleList';
 import * as actionsArticles from '../../actions/articles';
-import getQueryPagination from '../../utils/getQueryPagination';
+import getQuery from '../../utils/getQuery';
 // import {Link} from 'react-router-dom';
 import connect from '../../utils/connectPage';
 import to from '../../utils/to';
+import qs from 'qs';
 
 
 class Articles extends React.Component {
@@ -23,47 +24,56 @@ class Articles extends React.Component {
     history.push(to(`/articles?page=${page}&perPage=${perPage}`));
   };
 
-  handleSubmit = () => {
-    console.log('submit');
+  handleSubmit = (e) => {
+    e.preventDefault();
+    let {history} = this.props;
+    let query = this.props.form.getFieldsValue();
+    query = qs.stringify(query);
+    history.replace(to(`/articles?${query}`));
   };
 
-  requestPageData() {
-    let {page, perPage} = getQueryPagination({
-      page: 1,
-      perPage: 20
-    });
+  requestPageData = () => {
+    let query = getQuery();
 
-    actionsArticles.fetch(page, perPage).catch(function (err) {
+    actionsArticles.fetch(query).catch(function (err) {
       message.error(err.message, 2);
     });
-  }
+  };
 
   render() {
-    let {list, session, history, location} = this.props;
-    let {page, perPage, data, status} = list;
+    let {list, session, history, location, form} = this.props;
+    let {getFieldDecorator} = form;
     // userId, title, status
     return (
       <Authorization session={session} history={history}>
         <ContentContainer title='文章列表' location={location} history={history}>
           <Form layout='inline' onSubmit={this.handleSubmit}>
             <Form.Item label='用户ID'>
-              <Input
-                type='text'
-                placeholder='用户ID' />
+              {getFieldDecorator('userId')(
+                <Input
+                  type='text'
+                  placeholder='用户ID' />
+              )}
             </Form.Item>
 
             <Form.Item label='文章标题'>
-              <Input
-                type='text'
-                placeholder='文章标题' />
+              {getFieldDecorator('title')(
+                <Input
+                  name='title'
+                  type='text'
+                  placeholder='文章标题' />
+              )}
             </Form.Item>
 
             <Form.Item label='文章状态'>
-              <Select placeholder='选择文章状态' style={{width: '100px'}}>
-                <Option value="published">published</Option>
-                <Option value="unpublished">unpublished</Option>
-                <Option value="deleted">deleted</Option>
-              </Select>
+              {getFieldDecorator('status')(
+                <Select placeholder='选择文章状态' style={{width: '100px'}}>
+                  <Select.Option key='empty' value=''>选择文章状态</Select.Option>
+                  <Select.Option key='published'>published</Select.Option>
+                  <Select.Option key='unpiblished' >unpublished</Select.Option>
+                  <Select.Option key='deleted'>deleted</Select.Option>
+                </Select>
+              )}
             </Form.Item>
 
             <Form.Item>
@@ -72,10 +82,7 @@ class Articles extends React.Component {
           </Form>
 
           <ArticleList
-            data={data}
-            page={page}
-            perPage={perPage}
-            status={status}
+            {...list}
             history={history} />
         </ContentContainer>
       </Authorization>
@@ -108,4 +115,4 @@ export default connect(function (state) {
   });
 
   return props;
-}, Articles);
+}, Form.create()(Articles));
