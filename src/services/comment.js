@@ -35,8 +35,8 @@ export function getById(id) {
 }
 
 // 获取所有评论
-export function getList(page, perPage) {
-  let url = `${COMMENTS}?page=${page}&per_page=${perPage}`;
+export function getList(page, per_page) {
+  let url = `${COMMENTS}?page=${page}&per_page=${per_page}`;
   return http.get(url);
 }
 
@@ -46,13 +46,13 @@ export function search(query) {
 }
 
 // 获取某用户的所有评论
-export function getListByUserId(userId, page, perPage) {
-  let url = `${userSnippet(userId)}?page=${page}&per_page=${perPage}`;
+export function getListByUserId(userId, page, per_page) {
+  let url = `${userSnippet(userId)}?page=${page}&per_page=${per_page}`;
   return http.get(url);
 }
 
 // 获取某文章的所有评论
-export function getListByArticleId(articleId, page, perPage) {
-  let url = `${articleSnippet(articleId)}?page=${page}&per_page=${perPage}`;
+export function getListByArticleId(articleId, page, per_page) {
+  let url = `${articleSnippet(articleId)}?page=${page}&per_page=${per_page}`;
   return http.get(url);
 }

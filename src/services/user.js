@@ -18,8 +18,8 @@ export function authorize(name, password) {
 }
 
 // 获取所有用户
-export function getList(page, perPage = 20) {
-  let url = `${USERS}?page=${page}&per_page=${perPage}`;
+export function getList(page, per_page = 20) {
+  let url = `${USERS}?page=${page}&per_page=${per_page}`;
   return http.get(url);
 }
 

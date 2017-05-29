@@ -30,8 +30,8 @@ const Column = Table.Column;
 
 export default class UserList extends React.Component {
   handlePaginate = (page) => {
-    let {perPage, history} = this.props;
-    history.push(to(`/users?page=${page}&perPage=${perPage}`));
+    let {per_page, history} = this.props;
+    history.push(to(`/users?page=${page}&per_page=${per_page}`));
   };
 
   renderAction = (user) => {
@@ -59,11 +59,11 @@ export default class UserList extends React.Component {
 
 
   render() {
-    let {data, page, perPage, status} = this.props;
+    let {data, page, per_page, status} = this.props;
 
     // 只显示下一页，没有了就不显示
-    let total = page * perPage;
-    if (data.length >= perPage) {
+    let total = page * per_page;
+    if (data.length >= per_page) {
       total++;
     }
 
@@ -74,7 +74,7 @@ export default class UserList extends React.Component {
           dataSource={data}
           pagination={{
             current: page,
-            pageSize: perPage,
+            pageSize: per_page,
             total: total,
             onChange: this.handlePaginate
           }}>

@@ -17,12 +17,12 @@ function request(message = '请求数据...') {
 }
 
 
-function requestSuccess(data, page, perPage, message = '请求数据成功！') {
+function requestSuccess(data, page, per_page, message = '请求数据成功！') {
   let action = {
     type: REQUEST_GET_COMMENTS_SUCCESS,
     data,
     page,
-    perPage,
+    per_page,
     message
   };
 
@@ -39,11 +39,11 @@ function requestFailure(message = '请求数据失败！') {
 }
 
 
-export function fetch(page, perPage = 20) {
+export function fetch(page, per_page = 20) {
   request();
 
-  return servicesComment.getList(page, perPage).then(function (articles) {
-    requestSuccess(articles, page, perPage);
+  return servicesComment.getList(page, per_page).then(function (articles) {
+    requestSuccess(articles, page, per_page);
     return articles;
   }).catch(function (err) {
     requestFailure(err.message);

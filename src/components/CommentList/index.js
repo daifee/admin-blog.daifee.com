@@ -107,16 +107,16 @@ function handleRestore(comment) {
 }
 
 
-function handlePaginate(page, perPage, history) {
-  history.push(to(`/comments?page=${page}&per_page=${perPage}`));
+function handlePaginate(page, per_page, history) {
+  history.push(to(`/comments?page=${page}&per_page=${per_page}`));
 }
 
 export default function CommentList(props) {
-  let {data, page, perPage, status, history} = props;
+  let {data, page, per_page, status, history} = props;
 
   // 只显示下一页，没有了就不显示
-  let total = page * perPage;
-  if (data.length >= perPage) {
+  let total = page * per_page;
+  if (data.length >= per_page) {
     total++;
   }
 
@@ -128,9 +128,9 @@ export default function CommentList(props) {
       rowKey='id'
       pagination={{
         current: page,
-        pageSize: perPage,
+        pageSize: per_page,
         total: total,
-        onChange: (page) => handlePaginate(page, perPage, history)
+        onChange: (page) => handlePaginate(page, per_page, history)
       }} />
   );
 }

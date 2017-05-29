@@ -61,8 +61,8 @@ export function getOneById(id) {
 }
 
 // 获取所有文章
-export function getList(page, perPage = 20) {
-  let url = `${ARTICLES}?page=${page}&per_page=${perPage}`;
+export function getList(page, per_page = 20) {
+  let url = `${ARTICLES}?page=${page}&per_page=${per_page}`;
   return http.get(url);
 }
 
@@ -76,9 +76,9 @@ export function search(query) {
  * @export
  * @param {any} userId 用户ID
  * @param {any} page
- * @param {number} [perPage=20]
+ * @param {number} [per_page=20]
  */
-export function getListByUserId(userId, page, perPage = 20) {
+export function getListByUserId(userId, page, per_page = 20) {
   let url = `${userSnippet(userId)}`;
   return http.get(url);
 }

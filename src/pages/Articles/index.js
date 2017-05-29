@@ -20,8 +20,8 @@ class Articles extends React.Component {
 
   handlePaginate = (page) => {
     let {list, history} = this.props;
-    let {perPage} = list;
-    history.push(to(`/articles?page=${page}&perPage=${perPage}`));
+    let {per_page} = list;
+    history.push(to(`/articles?page=${page}&per_page=${per_page}`));
   };
 
   handleSubmit = (e) => {

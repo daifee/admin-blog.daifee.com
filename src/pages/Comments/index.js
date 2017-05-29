@@ -16,7 +16,7 @@ class Comments extends React.Component {
 
   render() {
     let {list, history, location, session} = this.props;
-    let {page, perPage, data, status} = list;
+    let {page, per_page, data, status} = list;
 
     return (
       <Authorization session={session} history={history}>
@@ -25,7 +25,7 @@ class Comments extends React.Component {
             history={history}
             data={data}
             page={page}
-            perPage={perPage}
+            per_page={per_page}
             status={status} />
         </ContentContainer>
       </Authorization>
@@ -44,12 +44,12 @@ class Comments extends React.Component {
   }
 
   requestPageData() {
-    let {page, perPage} = getQueryPagination({
+    let {page, per_page} = getQueryPagination({
       page: 1,
-      perPage: 20
+      per_page: 20
     });
 
-    actionsComments.fetch(page, perPage).catch(function (err) {
+    actionsComments.fetch(page, per_page).catch(function (err) {
       message.error(err.message, 2);
       console.error(err);
     });

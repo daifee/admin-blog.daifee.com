@@ -21,7 +21,7 @@ const DEFAULT_LIST_STATE = {
   status: 'init',
   message: '',
   page: 1,
-  perPage: 20
+  per_page: 20
 };
 
 
@@ -65,7 +65,7 @@ function getUsersSuccess(state, action) {
     data: [...data],
     status: 'success',
     page: action.page,
-    perPage: action.perPage,
+    per_page: action.per_page,
     message: action.message
   }};
 

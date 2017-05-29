@@ -34,7 +34,7 @@ class Article extends React.Component {
             history={history}
             data={data}
             page={1}
-            perPage={20}
+            per_page={20}
             status={status} />
           </div>
           <br />
