@@ -25,13 +25,16 @@ import {
 } from 'antd';
 import * as actionsUser from '../../actions/user';
 import to from '../../utils/to';
+import qs from 'qs';
 
 const Column = Table.Column;
 
 export default class UserList extends React.Component {
   handlePaginate = (page) => {
-    let {per_page, history} = this.props;
-    history.push(to(`/users?page=${page}&per_page=${per_page}`));
+    let {query, history} = this.props;
+    query = {...query, page};
+    query = qs.stringify(query);
+    history.push(to(`/users?${query}`));
   };
 
   renderAction = (user) => {
@@ -59,7 +62,8 @@ export default class UserList extends React.Component {
 
 
   render() {
-    let {data, page, per_page, status} = this.props;
+    let {data, query, status} = this.props;
+    let {page, per_page} = query;
 
     // 只显示下一页，没有了就不显示
     let total = page * per_page;
@@ -88,7 +92,7 @@ export default class UserList extends React.Component {
           <Column key='updatedAt' title='更新时间' dataIndex='updatedAt' />
           <Column
             key='articleNum'
-            title='发表的文章'
+            title='文章数量'
             dataIndex='articleNum'
             render={this.renderArticlesLink}
              />
@@ -102,7 +106,7 @@ export default class UserList extends React.Component {
   }
 
   renderArticlesLink(num, user) {
-    return (<Link to={to(`/users/${user.id}/articles`)}>{num}</Link>);
+    return (<Link to={to(`/articles?userId=${user.id}`)}>{num}</Link>);
   }
 }
 
@@ -112,7 +116,7 @@ export default class UserList extends React.Component {
 function handleMenuClick(e, user, history) {
   switch (e.key) {
     case '1':
-      history.push(to(`/users/${user.id}/comments`));
+      history.push(to(`/comments?userId=${user.id}`));
       break;
     case '2':
       history.push(to(`/users/${user.id}/edit`));
