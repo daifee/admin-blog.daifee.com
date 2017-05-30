@@ -33,8 +33,10 @@ class Article extends React.Component {
             pagination={false}
             history={history}
             data={data}
-            page={1}
-            per_page={20}
+            query={{
+              page: 1,
+              per_page: 20
+            }}
             status={status} />
           </div>
           <br />
@@ -54,7 +56,7 @@ class Article extends React.Component {
 
   componentDidMount() {
     let {params} = this.props.match;
-
+    console.log(this.props);
     let hide = message.loading('正在加载...');
     actionArticle.getOneById(params.id).then(function () {
       hide();

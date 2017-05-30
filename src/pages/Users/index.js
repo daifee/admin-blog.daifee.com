@@ -31,66 +31,70 @@ class Users extends React.Component {
     return (
       <Authorization session={session} history={history}>
         <ContentContainer location={location} title='用户列表' history={history}>
-          <Form layout='inline' onSubmit={this.handleSubmit}>
-            <Form.Item label='ID'>
-              {getFieldDecorator('_id', {initialValue: query._id})(
-                <Input
-                  name='_id'
-                  type='text'
-                  placeholder='ID' />
-              )}
-            </Form.Item>
+          <div className='search-form'>
+            <Form layout='inline' onSubmit={this.handleSubmit}>
+              <Form.Item label='ID'>
+                {getFieldDecorator('_id', {initialValue: query._id})(
+                  <Input
+                    name='_id'
+                    type='text'
+                    placeholder='ID' />
+                )}
+              </Form.Item>
 
-            <Form.Item label='用户名'>
-              {getFieldDecorator('name', {initialValue: query.name})(
-                <Input
-                  name='name'
-                  type='text'
-                  placeholder='用户名' />
-              )}
-            </Form.Item>
+              <Form.Item label='用户名'>
+                {getFieldDecorator('name', {initialValue: query.name})(
+                  <Input
+                    name='name'
+                    type='text'
+                    placeholder='用户名' />
+                )}
+              </Form.Item>
 
-            <Form.Item label='邮箱'>
-              {getFieldDecorator('email', {initialValue: query.email})(
-                <Input
-                  type='text'
-                  placeholder='邮箱' />
-              )}
-            </Form.Item>
+              <Form.Item label='邮箱'>
+                {getFieldDecorator('email', {initialValue: query.email})(
+                  <Input
+                    type='text'
+                    placeholder='邮箱' />
+                )}
+              </Form.Item>
 
-            <Form.Item label='角色'>
-              {getFieldDecorator('role', {initialValue: query.role})(
-                <Select
-                  placeholder='选择角色'
-                  style={{width: '100px'}}>
-                  <Select.Option key='empty' value=''>不选</Select.Option>
-                  <Select.Option key='user'>user</Select.Option>
-                  <Select.Option key='administrator' >administrator</Select.Option>
-                </Select>
-              )}
-            </Form.Item>
+              <Form.Item label='角色'>
+                {getFieldDecorator('role', {initialValue: query.role})(
+                  <Select
+                    placeholder='选择角色'
+                    style={{width: '100px'}}>
+                    <Select.Option key='empty' value=''>不选</Select.Option>
+                    <Select.Option key='user'>user</Select.Option>
+                    <Select.Option key='administrator' >administrator</Select.Option>
+                  </Select>
+                )}
+              </Form.Item>
 
-            <Form.Item label='状态'>
-              {getFieldDecorator('status', {initialValue: query.status})(
-                <Select
-                  placeholder='选择状态'
-                  style={{width: '100px'}}>
-                  <Select.Option key='empty' value=''>不选</Select.Option>
-                  <Select.Option key='normal'>normal</Select.Option>
-                  <Select.Option key='blocked' >blocked</Select.Option>
-                  <Select.Option key='deleted'>deleted</Select.Option>
-                </Select>
-              )}
-            </Form.Item>
+              <Form.Item label='状态'>
+                {getFieldDecorator('status', {initialValue: query.status})(
+                  <Select
+                    placeholder='选择状态'
+                    style={{width: '100px'}}>
+                    <Select.Option key='empty' value=''>不选</Select.Option>
+                    <Select.Option key='normal'>normal</Select.Option>
+                    <Select.Option key='blocked' >blocked</Select.Option>
+                    <Select.Option key='deleted'>deleted</Select.Option>
+                  </Select>
+                )}
+              </Form.Item>
 
-            <Form.Item>
-              <Button type="primary" htmlType="submit">搜 索</Button>
-            </Form.Item>
-          </Form>
+              <Form.Item>
+                <Button type="primary" htmlType="submit">搜 索</Button>
+              </Form.Item>
+            </Form>
+          </div>
 
-          <UserList
-            history={history}
-            {...list} />
+          <div className='search-list'>
+            <UserList
+              history={history}
+              {...list} />
+          </div>
         </ContentContainer>
       </Authorization>
     );

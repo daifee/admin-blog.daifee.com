@@ -32,53 +32,57 @@ class Comments extends React.Component {
     return (
       <Authorization session={session} history={history}>
         <ContentContainer location={location} title='评论列表' history={history}>
-          <Form layout='inline' onSubmit={this.handleSubmit}>
-            <Form.Item label='评论ID'>
-              {getFieldDecorator('_id', {initialValue: query._id})(
-                <Input
-                  name='title'
-                  type='text'
-                  placeholder='评论ID' />
-              )}
-            </Form.Item>
+          <div className='search-form'>
+            <Form layout='inline' onSubmit={this.handleSubmit}>
+              <Form.Item label='评论ID'>
+                {getFieldDecorator('_id', {initialValue: query._id})(
+                  <Input
+                    name='title'
+                    type='text'
+                    placeholder='评论ID' />
+                )}
+              </Form.Item>
 
-            <Form.Item label='用户ID'>
-              {getFieldDecorator('userId', {initialValue: query.userId})(
-                <Input
-                  name='title'
-                  type='text'
-                  placeholder='用户ID' />
-              )}
-            </Form.Item>
+              <Form.Item label='用户ID'>
+                {getFieldDecorator('userId', {initialValue: query.userId})(
+                  <Input
+                    name='title'
+                    type='text'
+                    placeholder='用户ID' />
+                )}
+              </Form.Item>
 
-            <Form.Item label='文章ID'>
-              {getFieldDecorator('articleId', {initialValue: query.articleId})(
-                <Input
-                  type='text'
-                  placeholder='文章ID' />
-              )}
-            </Form.Item>
+              <Form.Item label='文章ID'>
+                {getFieldDecorator('articleId', {initialValue: query.articleId})(
+                  <Input
+                    type='text'
+                    placeholder='文章ID' />
+                )}
+              </Form.Item>
 
-            <Form.Item label='状态'>
-              {getFieldDecorator('status', {initialValue: query.status})(
-                <Select
-                  placeholder='选择状态'
-                  style={{width: '100px'}}>
-                  <Select.Option key='empty' value=''>不选</Select.Option>
-                  <Select.Option key='published'>published</Select.Option>
-                  <Select.Option key='deleted'>deleted</Select.Option>
-                </Select>
-              )}
-            </Form.Item>
+              <Form.Item label='状态'>
+                {getFieldDecorator('status', {initialValue: query.status})(
+                  <Select
+                    placeholder='选择状态'
+                    style={{width: '100px'}}>
+                    <Select.Option key='empty' value=''>不选</Select.Option>
+                    <Select.Option key='published'>published</Select.Option>
+                    <Select.Option key='deleted'>deleted</Select.Option>
+                  </Select>
+                )}
+              </Form.Item>
 
-            <Form.Item>
-              <Button type="primary" htmlType="submit">搜 索</Button>
-            </Form.Item>
-          </Form>
+              <Form.Item>
+                <Button type="primary" htmlType="submit">搜 索</Button>
+              </Form.Item>
+            </Form>
+          </div>
 
-          <CommentList
-            {...list}
-            history={history} />
+          <div className='search-list'>
+            <CommentList
+              {...list}
+              history={history} />
+          </div>
         </ContentContainer>
       </Authorization>
     );
