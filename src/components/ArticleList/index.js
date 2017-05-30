@@ -119,7 +119,7 @@ export default class ArticleList extends React.Component {
   }
 
   renderCommentsLink(commentNum, article) {
-    return (<Link to={to(`/articles/${article.id}/comments`)}>{commentNum}</Link>);
+    return (<Link to={to(`/comments?articleId=${article.id}`)}>{commentNum}</Link>);
   }
 }
 
