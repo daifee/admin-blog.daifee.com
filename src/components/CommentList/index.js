@@ -64,7 +64,7 @@ const columns = [
   },
   {
     title: '操作',
-    key: 'id',
+    key: 'action',
     render(comment) {
       if (comment.status === 'deleted') {
         return (
