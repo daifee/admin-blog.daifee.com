@@ -31,6 +31,7 @@ class Articles extends React.Component {
 
     actionsArticles.fetch(query).catch(function (err) {
       message.error(err.message, 2);
+      console.error(err);
     });
   };
 

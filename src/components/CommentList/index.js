@@ -19,6 +19,7 @@ import {
 } from 'antd';
 import * as actionsComment from '../../actions/comment'
 import to from '../../utils/to';
+import qs from 'qs';
 
 const columns = [
   {
@@ -107,12 +108,15 @@ function handleRestore(comment) {
 }
 
 
-function handlePaginate(page, per_page, history) {
-  history.push(to(`/comments?page=${page}&per_page=${per_page}`));
+function handlePaginate(page, query, history) {
+  query = {...query, page};
+  query = qs.stringify(query);
+  history.push(to(`/comments?${query}`));
 }
 
 export default function CommentList(props) {
-  let {data, page, per_page, status, history} = props;
+  let {data, query, status, history} = props;
+  let {page, per_page} = query;
 
   // 只显示下一页，没有了就不显示
   let total = page * per_page;
@@ -130,7 +134,7 @@ export default function CommentList(props) {
         current: page,
         pageSize: per_page,
         total: total,
-        onChange: (page) => handlePaginate(page, per_page, history)
+        onChange: (page) => handlePaginate(page, query, history)
       }} />
   );
 }

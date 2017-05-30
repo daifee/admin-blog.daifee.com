@@ -2,31 +2,83 @@
  * 评论列表
  */
 import React from 'react';
-import {message} from 'antd';
+import {message, Form, Input, Select, Button} from 'antd';
 import ContentContainer from '../../components/ContentContainer';
 import CommentList from '../../components/CommentList';
 import Authorization from '../../components/Authorization';
 import * as actionsComments from '../../actions/comments';
-import getQueryPagination from '../../utils/getQueryPagination';
+import getQuery from '../../utils/getQuery';
 import connect from '../../utils/connectPage';
+import to from '../../utils/to';
+import qs from 'qs';
 
 
 class Comments extends React.Component {
   unlinstenRouter = null;
 
-  render() {
-    let {list, history, location, session} = this.props;
-    let {page, per_page, data, status} = list;
+  handleSubmit = (e) => {
+    e.preventDefault();
+    let {history} = this.props;
+    let query = this.props.form.getFieldsValue();
+    query = qs.stringify(query);
+    history.replace(to(`/comments?${query}`));
+  };
 
+  render() {
+    let {list, form, history, location, session} = this.props;
+    let {getFieldDecorator} = form;
+    let query = list.query;
+    // userId, articleId, status
     return (
       <Authorization session={session} history={history}>
         <ContentContainer location={location} title='评论列表' history={history}>
+          <Form layout='inline' onSubmit={this.handleSubmit}>
+            <Form.Item label='评论ID'>
+              {getFieldDecorator('_id', {initialValue: query._id})(
+                <Input
+                  name='title'
+                  type='text'
+                  placeholder='评论ID' />
+              )}
+            </Form.Item>
+
+            <Form.Item label='用户ID'>
+              {getFieldDecorator('userId', {initialValue: query.userId})(
+                <Input
+                  name='title'
+                  type='text'
+                  placeholder='用户ID' />
+              )}
+            </Form.Item>
+
+            <Form.Item label='文章ID'>
+              {getFieldDecorator('articleId', {initialValue: query.articleId})(
+                <Input
+                  type='text'
+                  placeholder='文章ID' />
+              )}
+            </Form.Item>
+
+            <Form.Item label='状态'>
+              {getFieldDecorator('status', {initialValue: query.status})(
+                <Select
+                  placeholder='选择状态'
+                  style={{width: '100px'}}>
+                  <Select.Option key='empty' value=''>不选</Select.Option>
+                  <Select.Option key='published'>published</Select.Option>
+                  <Select.Option key='deleted'>deleted</Select.Option>
+                </Select>
+              )}
+            </Form.Item>
+
+            <Form.Item>
+              <Button type="primary" htmlType="submit">搜 索</Button>
+            </Form.Item>
+          </Form>
+
           <CommentList
-            history={history}
-            data={data}
-            page={page}
-            per_page={per_page}
-            status={status} />
+            {...list}
+            history={history} />
         </ContentContainer>
       </Authorization>
     );
@@ -44,12 +96,9 @@ class Comments extends React.Component {
   }
 
   requestPageData() {
-    let {page, per_page} = getQueryPagination({
-      page: 1,
-      per_page: 20
-    });
+    let query = getQuery();
 
-    actionsComments.fetch(page, per_page).catch(function (err) {
+    actionsComments.fetch(query).catch(function (err) {
       message.error(err.message, 2);
       console.error(err);
     });
@@ -70,4 +119,4 @@ export default connect(function (state) {
   });
 
   return props;
-}, Comments);
+}, Form.create()(Comments));
