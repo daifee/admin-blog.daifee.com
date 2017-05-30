@@ -67,7 +67,7 @@ function getArticlesSuccess(state, action) {
   let nextState = {...state, ...{
     data: [...data],
     status: 'success',
-    query: {...state.query, ...action.query},
+    query: {...action.query},
     message: action.message
   }};
 
