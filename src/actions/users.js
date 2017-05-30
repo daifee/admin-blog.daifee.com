@@ -17,12 +17,11 @@ function request(message = '请求数据...') {
 }
 
 
-function requestSuccess(data, page, per_page, message = '请求数据成功！') {
+function requestSuccess(data, query, message = '请求数据成功！') {
   let action = {
     type: REQUEST_GET_USERS_SUCCESS,
     data,
-    page,
-    per_page,
+    query,
     message
   };
 
@@ -39,11 +38,19 @@ function requestFailure(message = '请求数据失败！') {
 }
 
 
-export function fetch(page, per_page = 20) {
+export function fetch(query) {
+  query = {
+    ...{
+      page: 1,
+      per_page: 20
+    },
+    ...query
+  };
+
   request();
 
-  return servicesUser.getList(page, per_page).then(function (articles) {
-    requestSuccess(articles, page, per_page);
+  return servicesUser.search(query).then(function (articles) {
+    requestSuccess(articles, query);
     return articles;
   }).catch(function (err) {
     requestFailure(err.message);

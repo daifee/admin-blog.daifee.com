@@ -20,8 +20,10 @@ const DEFAULT_LIST_STATE = {
   data: [],
   status: 'init',
   message: '',
-  page: 1,
-  per_page: 20
+  query: {
+    page: 1,
+    per_page: 20
+  }
 };
 
 
@@ -64,8 +66,7 @@ function getUsersSuccess(state, action) {
   let nextState = {...state, ...{
     data: [...data],
     status: 'success',
-    page: action.page,
-    per_page: action.per_page,
+    query: {...action.query},
     message: action.message
   }};
 

@@ -77,7 +77,7 @@ class Articles extends React.Component {
                   style={{width: '100px'}}>
                   <Select.Option key='empty' value=''>不选</Select.Option>
                   <Select.Option key='published'>published</Select.Option>
-                  <Select.Option key='unpiblished' >unpublished</Select.Option>
+                  <Select.Option key='unpublished' >unpublished</Select.Option>
                   <Select.Option key='deleted'>deleted</Select.Option>
                 </Select>
               )}
