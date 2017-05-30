@@ -1,5 +1,7 @@
 # admin-blog.daifee.com
 
+访问地址[https://daifee.github.io/admin-blog.daifee.com/articles](https://daifee.github.io/admin-blog.daifee.com/articles)
+
 [blog.daifee.com](https://blog.daifee.com)的后台
 
 
