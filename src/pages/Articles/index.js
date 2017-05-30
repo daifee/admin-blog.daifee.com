@@ -44,6 +44,15 @@ class Articles extends React.Component {
       <Authorization session={session} history={history}>
         <ContentContainer title='文章列表' location={location} history={history}>
           <Form layout='inline' onSubmit={this.handleSubmit}>
+            <Form.Item label='文章ID'>
+              {getFieldDecorator('_id', {initialValue: query._id})(
+                <Input
+                  name='_id'
+                  type='text'
+                  placeholder='文章ID' />
+              )}
+            </Form.Item>
+
             <Form.Item label='文章标题'>
               {getFieldDecorator('title', {initialValue: query.title})(
                 <Input
@@ -61,10 +70,10 @@ class Articles extends React.Component {
               )}
             </Form.Item>
 
-            <Form.Item label='文章状态'>
+            <Form.Item label='状态'>
               {getFieldDecorator('status', {initialValue: query.status})(
                 <Select
-                  placeholder='选择文章状态'
+                  placeholder='选择状态'
                   style={{width: '100px'}}>
                   <Select.Option key='empty' value=''>不选</Select.Option>
                   <Select.Option key='published'>published</Select.Option>
