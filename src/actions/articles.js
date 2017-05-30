@@ -16,12 +16,11 @@ function request(message = '请求数据...') {
   store.dispatch(action);
 }
 
-function requestSuccess(data, page, per_page, message = '请求数据成功！') {
+function requestSuccess(data, query, message = '请求数据成功！') {
   let action = {
     type: REQUEST_GET_ARTICLES_SUCCESS,
     data,
-    page,
-    per_page,
+    query,
     message
   };
 
@@ -50,7 +49,7 @@ export function fetch(query) {
   request();
 
   return servicesArticle.search(query).then(function (articles) {
-    requestSuccess(articles, query.page, query.per_page);
+    requestSuccess(articles, query);
     return articles;
   }).catch(function (err) {
     requestFailure(err.message);

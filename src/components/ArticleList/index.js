@@ -25,6 +25,7 @@ import {
 } from 'antd';
 import * as actionsArticle from '../../actions/article';
 import to from '../../utils/to';
+import qs from 'qs';
 
 const Column = Table.Column;
 
@@ -32,8 +33,10 @@ const Column = Table.Column;
 
 export default class ArticleList extends React.Component {
   handlePaginate = (page) => {
-    let {per_page, history} = this.props;
-    history.push(to(`/articles?page=${page}&per_page=${per_page}`));
+    let {query, history} = this.props;
+    query = {...query, page};
+    query = qs.stringify(query);
+    history.push(to(`/articles?${query}`));
   };
 
   renderAction = (article) => {
@@ -61,7 +64,8 @@ export default class ArticleList extends React.Component {
   };
 
   render() {
-    let {data, page, per_page, status, pagination} = this.props;
+    let {data, query, status, pagination} = this.props;
+    let {page, per_page} = query;
 
     // 只显示下一页，没有了就不显示
     let total = page * per_page;

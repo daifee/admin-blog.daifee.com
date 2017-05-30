@@ -20,8 +20,10 @@ const DEFAULT_LIST_STATE = {
   data: [],
   status: 'init',
   message: 'init',
-  page: 1,
-  per_page: 20
+  query: {
+    page: 1,
+    per_page: 20
+  }
 };
 
 
@@ -65,8 +67,7 @@ function getArticlesSuccess(state, action) {
   let nextState = {...state, ...{
     data: [...data],
     status: 'success',
-    page: action.page,
-    per_page: action.per_page,
+    query: {...state.query, ...action.query},
     message: action.message
   }};
 

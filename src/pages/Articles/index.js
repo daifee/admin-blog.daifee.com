@@ -18,12 +18,6 @@ import qs from 'qs';
 class Articles extends React.Component {
   unlinstenRouter = null;
 
-  handlePaginate = (page) => {
-    let {list, history} = this.props;
-    let {per_page} = list;
-    history.push(to(`/articles?page=${page}&per_page=${per_page}`));
-  };
-
   handleSubmit = (e) => {
     e.preventDefault();
     let {history} = this.props;
@@ -43,21 +37,14 @@ class Articles extends React.Component {
   render() {
     let {list, session, history, location, form} = this.props;
     let {getFieldDecorator} = form;
+    let query = list.query;
     // userId, title, status
     return (
       <Authorization session={session} history={history}>
         <ContentContainer title='文章列表' location={location} history={history}>
           <Form layout='inline' onSubmit={this.handleSubmit}>
-            <Form.Item label='用户ID'>
-              {getFieldDecorator('userId')(
-                <Input
-                  type='text'
-                  placeholder='用户ID' />
-              )}
-            </Form.Item>
-
             <Form.Item label='文章标题'>
-              {getFieldDecorator('title')(
+              {getFieldDecorator('title', {initialValue: query.title})(
                 <Input
                   name='title'
                   type='text'
@@ -65,10 +52,20 @@ class Articles extends React.Component {
               )}
             </Form.Item>
 
+            <Form.Item label='用户ID'>
+              {getFieldDecorator('userId', {initialValue: query.userId})(
+                <Input
+                  type='text'
+                  placeholder='用户ID' />
+              )}
+            </Form.Item>
+
             <Form.Item label='文章状态'>
-              {getFieldDecorator('status')(
-                <Select placeholder='选择文章状态' style={{width: '100px'}}>
-                  <Select.Option key='empty' value=''>选择文章状态</Select.Option>
+              {getFieldDecorator('status', {initialValue: query.status})(
+                <Select
+                  placeholder='选择文章状态'
+                  style={{width: '100px'}}>
+                  <Select.Option key='empty' value=''>不选</Select.Option>
                   <Select.Option key='published'>published</Select.Option>
                   <Select.Option key='unpiblished' >unpublished</Select.Option>
                   <Select.Option key='deleted'>deleted</Select.Option>
