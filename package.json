@@ -62,8 +62,9 @@
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start-js": "node scripts/start.js",
     "start": "npm-run-all -p watch-css start-js",
-    "build": "./build.sh",
-    "test": "node scripts/test.js --env=jsdom"
+    "build": "npm run build-css && node scripts/build.js",
+    "test": "node scripts/test.js --env=jsdom",
+    "deploy": "./deploy"
   },
   "jest": {
     "collectCoverageFrom": [

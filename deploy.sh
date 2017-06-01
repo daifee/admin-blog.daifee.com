@@ -3,9 +3,7 @@
 PUBLIC_URL='/admin-blog.daifee.com'
 export PUBLIC_URL
 
-npm run build-css
-node scripts/build.js
-# react-scripts build
+node run build
 
 rm -rf ./docs
 cp -r ./build ./docs
