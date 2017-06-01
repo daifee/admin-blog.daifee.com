@@ -1,7 +1,9 @@
 #!/bin/bash
 
 PUBLIC_URL='/admin-blog.daifee.com'
+DEPLOY='1'
 export PUBLIC_URL
+export DEPLOY
 
 npm run build
 
